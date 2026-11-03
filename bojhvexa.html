@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BojhVexa Engine Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for beautiful analytics curves -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Bhojvexa</h1>
+        <p>Smart Campus Dining & Real-Time Waste Analytics Engine</p>
+    </header>
+
+    <!-- SYSTEM LOGIN CARD -->
+    <section class="login">
+        <h2>System Login</h2>
+        <input type="text" id="username" placeholder="Enter Your Name">
+        <select id="role">
+            <option value="student">Student Portal</option>
+            <option value="manager">Predictive Kitchen Dashboard (Chef)</option>
+        </select>
+        <button onclick="login()">Access System</button>
+    </section>
+
+    <!-- DASHBOARD VIEW PANEL -->
+    <section id="dashboard" class="hidden">
+        <h2 id="welcome"></h2>
+        
+        <!-- STUDENT ACTIONS LAYOUT VIEW -->
+        <div id="student-view" class="hidden">
+            <div class="wallet-card">
+                <h3>Your Skip-and-Earn Ledger</h3>
+                <div class="coin-balance"><span id="coin-amount">40</span> BojhCoins 🪙</div>
+                <p class="subtext">Redeemable for campus café coupons</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Upcoming Meal Status</h3>
+                <p>Next scheduled batch: <strong>Dinner (8:00 PM)</strong></p>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generatePass('Dinner')">Book Meal Pass</button>
+                    <button class="btn-danger" onclick="skipMeal()">Skip Meal & Earn 10 🪙</button>
+                </div>
+            </div>
+
+            <div id="pass-container" class="hidden entry-pass">
+                <h4>VALID DINING ENTRY PASS</h4>
+                <div class="qr-mock">
+                    <div class="qr-scanner-line"></div>
+                    <span style="font-size: 50px;">📋</span>
+                </div>
+                <h2 id="pass-meal-type">#TOKEN</h2>
+                <p id="pass-timestamp"></p>
+                <p class="secure-tag">🔐 Dynamic TOTP Secured</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Post-Meal Dish Feedback</h3>
+                <div class="tag-pool">
+                    <button class="tag-btn" onclick="submitFeedback('Too Oily')">🌶️ Too Oily</button>
+                    <button class="tag-btn" onclick="submitFeedback('Cold')">❄️ Cold</button>
+                    <button class="tag-btn" onclick="submitFeedback('Perfect')">✅ Perfect</button>
+                </div>
+                <p id="feedback-status" class="subtext"></p>
+            </div>
+        </div>
+
+        <!-- MESS MANAGER LOGICAL VIEWS -->
+        <div id="manager-view" class="hidden">
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <h4>Expected Headcount</h4>
+                    <h1 id="chef-headcount">412</h1>
+                    <p class="subtext text-green"><span id="chef-optouts">38</span> Opt-Outs Active</p>
+                </div>
+                <div class="metric-box">
+                    <h4>Pre-Locking Waste Saved</h4>
+                    <h1 id="chef-savings">₹1,520</h1>
+                    <p class="subtext text-green">Live Optimization Vector</p>
+                </div>
+            </div>
+
+            <div class="action-card">
+                <h3>Real-Time Waste Metrics Curve</h3>
+                <div style="position: relative; height:220px; width:100%;">
+                    <canvas id="wasteChart"></canvas>
+                </div>
+            </div>
+
+            <div id="chef-alerts-panel" class="action-card text-left hidden" style="border-left: 5px solid #dc2626;">
+                <h4 style="margin:0; color:#dc2626;">Live Feedback Telemetry</h4>
+                <p id="latest-alert-text" style="margin:5px 0 0 0; font-size:0.9rem;"></p>
+            </div>
+        </div>
+
+        <button class="btn-secondary" onclick="logout()" style="margin-top:20px;">Log Out</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
